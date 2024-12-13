@@ -1,31 +1,29 @@
 // src/navigation/TabNavigator.js
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // Importing Views
-import HomeScreen from '../screens/HomeScreen';
-import BudgetScreen from '../screens/BudgetScreen';
+import HomeScreen from "../screens/HomeScreen";
+import FriendScreen from "../screens/FriendScreen";
+import GroupScreen from "../screens/GroupScreen";
+import SettingScreen from "../screens/SettingScreen";
+import ActivityScreen from "../screens/ActivityScreen";
+import BudgetScreen from "../screens/BudgetScreen";
+import { TabBar } from "../components/TabBar";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName;
-          if (route.name === 'Home') {
-            iconName = 'home';
-          } else if (route.name === 'Settings') {
-            iconName = 'settings';
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
+      tabBar={props => <TabBar {...props} />}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={BudgetScreen} />
+      <Tab.Screen name="Friends" component={FriendScreen} />
+      <Tab.Screen name="Groups" component={GroupScreen} />
+      <Tab.Screen name="Activity" component={ActivityScreen} />
+      <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
   );
 };
