@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -12,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
   const [loginForm, setLoginForm] = React.useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState({ email: "", password: "" });
-
+  const [loading, setLoading] = React.useState(false);
   const onChange = (key, value) => {
     setLoginForm({ ...loginForm, [key]: value });
     setError({ ...error, [key]: "" }); // Clear error on change
@@ -26,24 +27,38 @@ const LoginScreen = ({ navigation }) => {
   const onBlur = (key) => {
     if (key === "email") {
       if (!validateEmail(loginForm.email)) {
-        setError((prevError) => ({ ...prevError, email: "Invalid email address" }));
+        setError((prevError) => ({
+          ...prevError,
+          email: "Invalid email address",
+        }));
       }
     }
   };
 
   const handleLogin = () => {
     if (!loginForm.email || !validateEmail(loginForm.email)) {
-      setError((prevError) => ({ ...prevError, email: "Please enter a valid email" }));
+      setError((prevError) => ({
+        ...prevError,
+        email: "Please enter a valid email",
+      }));
       return;
     }
 
     if (!loginForm.password) {
-      setError((prevError) => ({ ...prevError, password: "Password is required" }));
+      setError((prevError) => ({
+        ...prevError,
+        password: "Password is required",
+      }));
       return;
     }
 
     // Simulate successful login
     console.log("Login successful", loginForm);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      // navigateToMainApp();
+    }, 2000);
     return;
     navigation.replace("MainApp"); // Navigate to the TabNavigator
   };
@@ -70,7 +85,7 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => onChange("email", text)}
         />
       </View>
-        {error.email ? <Text style={styles.errorText}>{error.email}</Text> : null}
+      {error.email ? <Text style={styles.errorText}>{error.email}</Text> : null}
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -88,18 +103,29 @@ const LoginScreen = ({ navigation }) => {
           onPress={toggleShowPassword}
           style={{ position: "absolute", right: 10, top: 10 }}
         />
-        {error.password ? <Text style={styles.errorText}>{error.password}</Text> : null}
+        {error.password ? (
+          <Text style={styles.errorText}>{error.password}</Text>
+        ) : null}
       </View>
 
-      <TouchableOpacity onPress={handleLogin} style={styles.loginBtn}>
+      <TouchableOpacity
+        disabled={loading}
+        onPress={handleLogin}
+        style={[styles.loginBtn, loading ? { backgroundColor: "#B18AFF" } : null]}
+      >
         <Text style={styles.btnText}>Login</Text>
+        {loading ? (
+          <ActivityIndicator size="small" color="#fff" />
+        ) : (
+          <Ionicons name="arrow-forward" size={24} color="#fff" />
+        )}
       </TouchableOpacity>
 
       <Text style={styles.forgetPasswordText}>Forgot password?</Text>
 
       <View style={styles.signupContainer}>
         <Text style={styles.signupText}>
-          Don't have an account yet?{' '}
+          Don't have an account yet?{" "}
           <Text
             style={styles.signupLink}
             onPress={() => navigation.navigate("Signup")}
@@ -164,6 +190,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 16,
     marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
   },
   btnText: {
     color: "#fff",
