@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 const LoginScreen = ({ navigation }) => {
   const [loginForm, setLoginForm] = React.useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = React.useState(false);
@@ -111,7 +110,10 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity
         disabled={loading}
         onPress={handleLogin}
-        style={[styles.loginBtn, loading ? { backgroundColor: "#B18AFF" } : null]}
+        style={[
+          styles.loginBtn,
+          loading ? { backgroundColor: "#B18AFF" } : null,
+        ]}
       >
         <Text style={styles.btnText}>Login</Text>
         {loading ? (
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     flex: 1,
-    // padding: 10,
+    padding: 10,
     color: "#91919F",
   },
   errorText: {
