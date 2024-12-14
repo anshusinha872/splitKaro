@@ -1,15 +1,10 @@
-// src/navigation/TabNavigator.js
 import React from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-// Importing Views
 import HomeScreen from "../screens/HomeScreen";
 import FriendScreen from "../screens/FriendScreen";
 import GroupScreen from "../screens/GroupScreen";
 import SettingScreen from "../screens/SettingScreen";
 import ActivityScreen from "../screens/ActivityScreen";
-import BudgetScreen from "../screens/BudgetScreen";
 import { TabBar } from "../components/TabBar";
 
 const Tab = createBottomTabNavigator();
