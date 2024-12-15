@@ -1,9 +1,18 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 const FriendScreen = ({ navigation }) => {
   return (
-    <Text>FriendScreen</Text>
+    <View style={styles.container}>
+      <Text>FriendScreen</Text>
+    </View>
   )
 }
 
-export default FriendScreen
+export default FriendScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  }
+})

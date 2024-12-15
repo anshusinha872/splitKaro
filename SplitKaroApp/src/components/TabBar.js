@@ -14,7 +14,7 @@ export function TabBar({ state, descriptors, navigation }) {
     Groups: ["people", "people-outline"],
     Activity: ["receipt", "receipt-outline"],
     Setting: ["settings", "settings-outline"],
-    Onboarding: ["walk", "walk-outline"]
+    Onboarding: ["walk", "walk-outline"],
   };
 
   return (
@@ -58,26 +58,23 @@ export function TabBar({ state, descriptors, navigation }) {
             testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[
-              styles.tabItem,
-              isFocused ? styles.activeTab : styles.inactiveTab,
-            ]}
+            style={[styles.tabItem, isFocused ? styles.activeTab : styles.inactiveTab]}
           >
-            <Animated.View style={isFocused ? styles.iconActive : styles.icon}>
+            <View style={[styles.iconContainer, isFocused ? styles.activeIconContainer : null]}>
               <Ionicons
                 name={isFocused ? icons[route.name][0] : icons[route.name][1]}
                 size={24}
-                color={isFocused ? "#FFD700" : "#fff"}
+                color={isFocused ? "#fff" : "#ccc"}
               />
-            </Animated.View>
-            <Text
+            </View>
+            {/* <Text
               style={[
                 styles.tabLabel,
                 isFocused ? styles.activeLabel : styles.inactiveLabel,
               ]}
             >
               {label}
-            </Text>
+            </Text> */}
           </Pressable>
         );
       })}
@@ -88,56 +85,53 @@ export function TabBar({ state, descriptors, navigation }) {
 const styles = StyleSheet.create({
   tabbar: {
     position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
+    bottom: 20,
+    left: 20,
+    right: 20,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#282c34",
-    borderRadius: 15,
+    backgroundColor: "#1f1f1f",
+    borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 5,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.3,
     shadowRadius: 10,
-    elevation: 5,
+    elevation: 10,
+    overflow: "hidden",
   },
   tabItem: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 5,
-    paddingVertical: 5,
-    borderRadius: 10,
   },
-  activeTab: {
-    backgroundColor: "#444",
-    transform: [{ scale: 1.1 }],
-    elevation: 5,
-  },
-  inactiveTab: {
+  activeTab: {},
+  inactiveTab: {},
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: "transparent",
   },
-  icon: {
-    marginBottom: 2,
-  },
-  iconActive: {
-    marginBottom: 2,
-    transform: [{ scale: 1.2 }],
+  activeIconContainer: {
+    backgroundColor: "#3f3f3f",
   },
   tabLabel: {
+    marginTop: 4,
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   activeLabel: {
-    color: "#FFD700",
+    color: "#ffffff",
   },
   inactiveLabel: {
-    color: "#ccc",
+    color: "rgba(255, 255, 255, 0.7)",
   },
 });
