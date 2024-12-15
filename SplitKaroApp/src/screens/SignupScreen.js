@@ -9,8 +9,14 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import CheckBox from "react-native-check-box";
-
+import OtpModal from "../components/OtpModal";
 const SignupScreen = ({ navigation }) => {
+  const data = {
+    authType: "signup",
+    email: "anshusinha872@gmail.com",
+    method: "email",
+  };
+  const [modalVisible, setModalVisible] = React.useState(false);
   const [signupForm, setsignupForm] = React.useState({
     name: "",
     phone: "",
@@ -66,7 +72,8 @@ const SignupScreen = ({ navigation }) => {
     }
   };
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
+    setModalVisible(true);
     if (!signupForm.email || !validateEmail(signupForm.email)) {
       setError((prevError) => ({
         ...prevError,
@@ -84,10 +91,12 @@ const SignupScreen = ({ navigation }) => {
     }
 
     // Simulate successful login
-    console.log("Login successful", signupForm);
+    console.log("signup successful", signupForm);
     setLoading(true);
+    setModalVisible(true);
     setTimeout(() => {
       setLoading(false);
+      // setModalVisible(false);
       // navigateToMainApp();
     }, 2000);
     return;
@@ -97,7 +106,33 @@ const SignupScreen = ({ navigation }) => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
+  const onSucess = () => {
+    console.log("OTP Verified Successfully!");
+    setLoading(true);
+    setModalVisible(false);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.replace("MainApp"); // Navigate to the TabNavigator
+    }, 2000);
+  }
+  const onFail = () => {
+    console.log("OTP Verification Failed!");
+    setLoading(true);
+    setModalVisible(false);
+    setTimeout(() => {
+      setLoading(false);
+      // navigation.replace("MainApp"); // Navigate to the TabNavigator
+    }, 2000);
+  }
+  const onCancel = () => {
+    console.log("OTP Verification Cancelled!");
+    setLoading(true);
+    setModalVisible(false);
+    setTimeout(() => {
+      setLoading(false);
+      // navigation.replace("MainApp"); // Navigate to the TabNavigator
+    }, 2000);
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.headingText}>
@@ -174,7 +209,7 @@ const SignupScreen = ({ navigation }) => {
       </View>
       <TouchableOpacity
         disabled={loading}
-        onPress={handleLogin}
+        onPress={handleSignUp}
         style={[
           styles.loginBtn,
           loading ? { backgroundColor: "#B18AFF" } : null,
@@ -209,6 +244,15 @@ const SignupScreen = ({ navigation }) => {
           </Text>
         </Text>
       </View>
+      <OtpModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        navigation={navigation}
+        props={data}
+        onSucess={onSucess}
+        onFail={onFail}
+        onCancel={onCancel}
+      />
     </View>
   );
 };
@@ -243,6 +287,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 10,
     position: "relative",
+    overflow: "hidden",
   },
   inputField: {
     flex: 1,

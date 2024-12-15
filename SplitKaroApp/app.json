@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "SplitKaroApp",
-    "slug": "SplitKaroApp",
+    "slug": "split-karo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,16 +13,33 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.instincts.SplitKaroApp",
+      "runtimeVersion": "1.0.0"
+    
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "be318c55-41ec-44c2-a734-a10b1a13fe63"
+      }
+    },
+    "owner": "coolanshusinha",
+    "updates": {
+      "url": "https://u.expo.dev/be318c55-41ec-44c2-a734-a10b1a13fe63"
+    },
+    "scheme": "eas"
   }
 }
