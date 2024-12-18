@@ -1,22 +1,24 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons
+import { Ionicons } from "@expo/vector-icons";
 
 const BalanceCard = (props) => {
   return (
     <View
-      style={{
-        ...styles.balanceCard,
-        backgroundColor: props.type === "owe" ? "#00A86B" : "#FD3C4A",
-      }}
+      style={[
+        styles.balanceCard,
+        { backgroundColor: props.type === "owe" ? "#2AB784" : "#FD5662" },
+      ]}
     >
-      <View style={{ flexDirection: "row", alignItems: "center",height:100 }}>
+      <View style={styles.contentContainer}>
         <View style={styles.iconContainer}>
           <Ionicons
             name="log-out"
-            size={40}
-            style={{ transform: [{ rotate: props.type === "owe" ? "90deg" : "-90deg" }] }}
-            color={props.type === "owe" ? "#0ae093" : "#d30a19"}
+            size={24}
+            style={{
+              transform: [{ rotate: props.type === "owe" ? "90deg" : "-90deg" }],
+            }}
+            color={props.type === "owe" ? "#2AB784" : "#FD5662"}
           />
         </View>
         <View>
@@ -26,13 +28,6 @@ const BalanceCard = (props) => {
           </Text>
         </View>
       </View>
-      <Ionicons
-        name={props.type === "owe" ? "arrow-up" : "arrow-down"} // Change arrow direction based on type
-        size={70}
-        color={props.type === "owe" ? "#0ae093" : "#d30a19"} // Change arrow color based on type
-        style={styles.arrowIcon}
-      />{" "}
-      {/* Adding arrow icon */}
     </View>
   );
 };
@@ -42,41 +37,45 @@ export default BalanceCard;
 const styles = StyleSheet.create({
   balanceCard: {
     width: "48%",
-    // padding: 10,
-    height: 100,
     borderRadius: 10,
+    padding: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
+    marginBottom: 15,
   },
-  amount: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 5,
-    zIndex: 1,
-    letterSpacing: 1,
+  contentContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   iconContainer: {
     backgroundColor: "#fff",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection: "column",
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
     justifyContent: "center",
     alignItems: "center",
+    marginRight: 15,
+  },
+  amount: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   oweText: {
     fontSize: 14,
     color: "#fff",
-    letterSpacing: 1,
-    marginBottom: 10,
-    zIndex: 1,
-    fontWeight: "900",
+    fontWeight: "600",
+    letterSpacing: 0.8,
   },
   arrowIcon: {
     position: "absolute",
-    bottom: 0,
-    right: 0,
-    transform: [{ rotate: "45deg" }],
+    bottom: 10,
+    right: 10,
+    opacity: 0.8,
   },
 });

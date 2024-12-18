@@ -1,23 +1,16 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import BalanceCard from "../components/BalanceCard";
+import Charts from "../components/Charts";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Welcome to SplitKaro!</Text>
-      <Button
-        title="Go to Budget"
-        onPress={() => navigation.navigate("Budget")}
-      /> */}
       <View style={styles.balanceCardContainer}>
-        <BalanceCard
-          amount={100}
-          type="owe"
-        />
-        <BalanceCard 
-          amount={50}
-          type="owed"
-        />
+        <BalanceCard amount={100} type="owe" />
+        <BalanceCard amount={50} type="owed" />
+      </View>
+      <View>
+        <Charts />
       </View>
     </View>
   );
@@ -26,8 +19,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "#fff",
   },
   title: {
