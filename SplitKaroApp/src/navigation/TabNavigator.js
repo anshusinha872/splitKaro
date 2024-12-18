@@ -28,6 +28,13 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="AddExpense"
+        component={FriendScreen}
+        options={{
+          header: () => <Header />,
+        }}
+      />
+      <Tab.Screen
         name="Groups"
         component={GroupScreen}
         options={{
@@ -41,13 +48,13 @@ const TabNavigator = () => {
           header: () => <Header />,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Setting"
         component={SettingScreen}
         options={{
           header: () => <Header />,
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
