@@ -94,7 +94,7 @@ export function TabBar({ state, descriptors, navigation }) {
             <View
               style={[
                 styles.iconContainer,
-                isFocused && route.name === "AddExpense"
+                isModalVisible && route.name === "AddExpense"
                   ? styles.addExpenseIconContainerActive
                   : {},
               ]}
@@ -204,7 +204,10 @@ const styles = StyleSheet.create({
   },
   addExpenseIconContainerActive: {
     backgroundColor: "#3f3f3f",
-    transform: [{ translateY: -10 }],
+    transform: [
+      { translateY: -20 },
+      { scale: 1.2 },
+    ],
   },
   modalOverlay: {
     position: "absolute",
@@ -229,21 +232,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 25,
     backgroundColor: "#1f1f1f",
-  },
-  centerButton: {
-    top: 75,
-    left: 75,
-  },
-  topButton: {
-    top: 25,
-    left: 75,
-  },
-  leftButton: {
-    top: 75,
-    left: 25,
-  },
-  rightButton: {
-    top: 75,
-    left: 125,
   },
 });
