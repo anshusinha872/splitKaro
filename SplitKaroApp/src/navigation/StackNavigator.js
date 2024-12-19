@@ -30,7 +30,7 @@ const StackNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {true && (
+      {isFirstLaunch && (
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       )}
       <Stack.Screen name="Login" component={LoginScreen} />

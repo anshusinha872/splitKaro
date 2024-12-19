@@ -22,7 +22,7 @@ const BalanceCard = (props) => {
           />
         </View>
         <View>
-          <Text style={styles.amount}>${props.amount}</Text>
+          <Text style={styles.amount}>₹{props.amount}</Text>
           <Text style={styles.oweText}>
             {props.type === "owe" ? "You Owe" : "Owes You"}
           </Text>

@@ -15,15 +15,22 @@ const Charts = () => {
   const chartConfig = {
     backgroundGradientFrom: "#ffffff",
     backgroundGradientTo: "#ffffff",
-    color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`, 
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
-    strokeWidth: 1, 
-    useShadowColorFromDataset: false, 
+    color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    strokeWidth: 1,
+    useShadowColorFromDataset: false,
     propsForDots: {
-      r: "4", 
+      r: "4",
       strokeWidth: "1",
-      stroke: "#007AFF", 
+      stroke: "#007AFF",
     },
+    fillShadowGradient: "#007AFF", // Set the same color as the line
+    fillShadowGradientOpacity: 0.2, // Adjust opacity for the fill area
+    paddingRight: 0,
+    paddingLeft: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    
   };
 
   // Monthly expense data
@@ -32,8 +39,8 @@ const Charts = () => {
     datasets: [
       {
         data: [200, 450, 280, 800, 990, 430],
-        color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`, 
-        strokeWidth: 4, 
+        color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
+        strokeWidth: 4,
       },
     ],
   };
@@ -57,25 +64,32 @@ const Charts = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Expenses Overview</Text>
+      {/* <Text style={styles.title}>Expenses Overview</Text> */}
       <LineChart
-        data={isMonthly ? monthlyData : dailyData} 
-        withDots={true} 
-        width={screenWidth} 
-        withInnerLines={false} 
-        height={240}
-        chartConfig={chartConfig}
-        bezier 
+        data={isMonthly ? monthlyData : dailyData}
+        withDots={true}
+        width={screenWidth}
+        withInnerLines={false}
+        height={160}
+        chartConfig={{
+          ...chartConfig,
+          fillShadowGradient: "#007AFF", // Same color as the line
+          fillShadowGradientOpacity: 0.6, // Higher opacity for better visibility
+        }}
+        bezier
         style={styles.chart}
-        withVerticalLabels={true} 
-        withHorizontalLabels={true} 
-        formatYLabel={(yValue) => "$" + Math.round(yValue)} 
+        withVerticalLabels={false}
+        withHorizontalLabels={false}
+        formatYLabel={(yValue) => "$" + Math.round(yValue)}
         withOuterLines={false}
-        withHorizontalLines={true} 
+        withHorizontalLines={true}
+        withShadow={true}
+        fromZero={true}
+        transparent={true}
       />
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          style={[styles.btn, isMonthly && styles.activeBtn]} 
+          style={[styles.btn, isMonthly && styles.activeBtn]}
           onPress={() => toggleButton("monthly")}
         >
           <Text
@@ -89,7 +103,7 @@ const Charts = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.btn, !isMonthly && styles.activeBtn]} 
+          style={[styles.btn, !isMonthly && styles.activeBtn]}
           onPress={() => toggleButton("daily")}
         >
           <Text
@@ -113,40 +127,42 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start", // Align elements from the top
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "rgba(0, 122, 255,0.1)", // White background
+    borderRadius: 40,
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#6774dd", // Darker text color
-    marginBottom: 20,
+    marginBottom: 5,
   },
   chart: {
     borderRadius: 16,
     marginTop: 10,
     transform: [{ translateX: -10 }],
+    
   },
   btnContainer: {
-    flexDirection: "row", 
-    justifyContent: "space-around", 
+    flexDirection: "row",
+    justifyContent: "space-around",
     width: "100%",
-    marginTop: 0,
+    marginTop: 10,
   },
   btn: {
     backgroundColor: "#fff",
     padding: 5,
-    borderRadius: 8, 
-    borderWidth: 1, 
-    borderColor: "#6774dd", 
-    width: "45%", 
-    alignItems: "center", 
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#6774dd",
+    width: "45%",
+    alignItems: "center",
   },
   activeBtn: {
-    backgroundColor: "#6774dd", 
-    borderColor: "#fff", 
+    backgroundColor: "#6774dd",
+    borderColor: "#fff",
   },
   btnText: {
-    color: "#6774dd", 
+    color: "#6774dd",
   },
   activeBtnText: {
     color: "#fff",

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import BalanceCard from "../components/BalanceCard";
 import Charts from "../components/Charts";
+import RecentTransactions from "../components/RecentTransactions";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -11,6 +12,7 @@ export default function HomeScreen({ navigation }) {
       </View>
       <View>
         <Charts />
+        <RecentTransactions />
       </View>
     </View>
   );
