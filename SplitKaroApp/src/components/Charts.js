@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start", // Align elements from the top
     alignItems: "center",
     backgroundColor: "rgba(0, 122, 255,0.1)", // White background
-    borderRadius: 40,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
   },
   title: {
     fontSize: 18,
