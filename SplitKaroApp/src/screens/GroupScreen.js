@@ -1,13 +1,73 @@
 import React from "react";
 import {
+  FlatList,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const GroupScreen = () => {
+  const transactions = [
+    {
+      id: "1",
+      category: "Group-1",
+      description: "Buy some grocery",
+      amount: "₹500",
+      date: "20th Jan",
+      icon: require("../../assets/icons/shopping-bag.png"),
+    },
+    {
+      id: "2",
+      category: "Group-2",
+      description: "Buy some grocery",
+      amount: "₹500",
+      date: "20th Jan",
+      icon: require("../../assets/icons/shopping-bag.png"),
+    },
+    {
+      id: "3",
+      category: "Group-3",
+      description: "Buy some grocery",
+      amount: "₹500",
+      date: "20th Jan",
+      icon: require("../../assets/icons/shopping-bag.png"),
+    },
+    {
+      id: "4",
+      category: "Group-4",
+      description: "Buy some grocery",
+      amount: "₹500",
+      date: "20th Jan",
+      icon: require("../../assets/icons/shopping-bag.png"),
+    },
+  ];
+  const renderItem = ({ item }) => (
+    <View>
+      <View style={styles.transaction}>
+        <View style={styles.transactionIconContainer}>
+          <Image style={styles.transactionIcon} source={item.icon} />
+        </View>
+        <View style={styles.transactionDetails}>
+          <View style={styles.transactionCategoryDetails}>
+            <Text style={styles.transactionCategory}>{item.category}</Text>
+          </View>
+          <View style={{ alignItems: "flex-end" }}>
+            <Text style={styles.transactionDate}>{item.date}</Text>
+            <Text style={styles.transactionAmount}>{item.amount}</Text>
+          </View>
+        </View>
+      </View>
+      <View style={{ marginLeft: 50 }}>
+        <Text style={styles.transactionDescription}>{item.description}</Text>
+        <Text style={styles.transactionDescription}>{item.description}</Text>
+        <Text style={styles.transactionDescription}>{item.description}</Text>
+      </View>
+    </View>
+  );
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -16,8 +76,6 @@ const GroupScreen = () => {
           <Text style={styles.btnText}>Create a Group</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Adjusted ScrollView */}
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -48,26 +106,43 @@ const GroupScreen = () => {
           style={[styles.grpCategorybtn, styles.grpCategorybtnActive]}
         >
           <Text
-            style={[
-              styles.grpCategorybtnText,
-              styles.grpCategorybtnTextActive,
-            ]}
+            style={[styles.grpCategorybtnText, styles.grpCategorybtnTextActive]}
           >
             Others
           </Text>
         </TouchableOpacity>
       </ScrollView>
 
-      <View style={{ marginTop: 10 }}>
-        <Text>Group List</Text>
+      <View style={styles.subHeader}>
+        <Text>
+          Overall,you are owned{"  "}
+          <Text style={{ fontWeight: "bold" }}>₹500</Text>
+        </Text>
+        <TouchableOpacity style={styles.btn}>
+          <Ionicons name="options-outline" size={24} color="white" />
+        </TouchableOpacity>
       </View>
+      <ScrollView>
+
+      <View style={
+        {height: 500}
+      }>
+        <FlatList
+          data={transactions}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.transactionListContainer}
+          alwaysBounceVertical={true}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: "#fff",
     padding: 10,
   },
@@ -91,7 +166,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   grpCategoryListContainer: {
-    flexDirection: "row", // Ensure horizontal layout
+    flexDirection: "row",
     paddingVertical: 10,
     paddingHorizontal: 5,
     height: 40,
@@ -102,7 +177,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 10,
     borderRadius: 5,
-    marginRight: 5, // Adds space between buttons
+    marginRight: 5,
     height: 30,
   },
   grpCategorybtnText: {
@@ -114,6 +189,59 @@ const styles = StyleSheet.create({
   },
   grpCategorybtnTextActive: {
     color: "#fff",
+  },
+  subHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginTop: 10,
+  },
+  transactionListContainer: {
+    marginTop: 10,
+    paddingBottom: 150,
+  },
+  transaction: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 10,
+    marginTop: 10,
+    backgroundColor: "#FFF",
+  },
+  transactionIconContainer: {
+    backgroundColor: "#FCEED4",
+    padding: 5,
+    borderRadius: 10,
+  },
+  transactionIcon: {
+    width: 30,
+    height: 30,
+  },
+  transactionDetails: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 1,
+    marginLeft: 10,
+  },
+  transactionCategoryDetails: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  transactionCategory: {
+    fontSize: 16,
+  },
+  transactionDescription: {
+    color: "#A1A1A1",
+  },
+  transactionAmount: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FD5662",
+  },
+  transactionDate: {
+    color: "#A1A1A1",
+    fontSize: 12,
   },
 });
 
