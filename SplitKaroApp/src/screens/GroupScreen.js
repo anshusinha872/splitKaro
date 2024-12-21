@@ -55,7 +55,7 @@ const GroupScreen = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.group}>
-      <View style={{width: "100%", flexDirection: "row"}}>
+      <View style={{ width: "100%", flexDirection: "row" }}>
         <View style={styles.groupIconContainer}>
           <Image style={styles.groupIcon} source={item.icon} />
         </View>
@@ -71,9 +71,33 @@ const GroupScreen = () => {
       </View>
       <View>
         <View style={styles.groupDescriptionContainer}>
-          <Text style={styles.groupDescription}>{item.description}</Text>
-          <Text style={styles.groupDescription}>{item.description}</Text>
-          <Text style={styles.groupDescription}>{item.description}</Text>
+          <View style={styles.groupDescription}>
+            <Ionicons
+              name="return-down-forward-outline"
+              size={24}
+              color="#6C63FF"
+              style={{ marginRight: 6 }} // Add space between icon and text
+            />
+            <Text>{item.description}</Text>
+          </View>
+          <View style={styles.groupDescription}>
+            <Ionicons
+              name="return-down-forward-outline"
+              size={24}
+              color="#6C63FF"
+              style={{ marginRight: 6 }} // Add space between icon and text
+            />
+            <Text>{item.description}</Text>
+          </View>
+          <View style={styles.groupDescription}>
+            <Ionicons
+              name="return-down-forward-outline"
+              size={24}
+              color="#6C63FF"
+              style={{ marginRight: 6 }} // Add space between icon and text
+            />
+            <Text>{item.description}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -153,7 +177,7 @@ const styles = StyleSheet.create({
   },
   grpCategorybtn: {
     backgroundColor: "#F5F5F5",
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
     flexDirection: "row",
@@ -231,11 +255,22 @@ const styles = StyleSheet.create({
     color: "#FD5662",
   },
   groupDescriptionContainer: {
-    marginLeft: 50,
+    marginLeft: 20,
+    flexDirection: "column", // Ensure descriptions stack vertically
+    justifyContent: "flex-start", // Align items to the start
+    // marginTop: 8,
   },
   groupDescription: {
     fontSize: 14,
     color: "#A1A1A1",
+    flexDirection: "row", // For icons and text alignment
+    alignItems: "center", // Align items to the center
+    marginBottom: 4, // Add spacing between lines
+  },
+  treeIcon: {
+    color: "#6C63FF",
+    position: "absolute",
+    left: 0,
   },
 });
 
