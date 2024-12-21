@@ -22,6 +22,7 @@ export function TabBar({ state, descriptors, navigation }) {
     Setting: ["settings", "settings-outline"],
     Onboarding: ["walk", "walk-outline"],
     AddExpense: ["add", "add-outline"],
+    AddFriend: ["person-add", "person-add-outline"],
   };
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -58,56 +59,58 @@ export function TabBar({ state, descriptors, navigation }) {
 
   return (
     <View style={styles.tabbar}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const isFocused = state.index === index;
+      {state.routes
+        .filter((route) => route.name !== "AddFriend")
+        .map((route, index) => {
+          const { options } = descriptors[route.key];
+          const isFocused = state.index === index;
 
-        const onPress = () => {
-          if (route.name === "AddExpense") {
-            toggleModal();
-          } else {
-            if (isModalVisible) {
+          const onPress = () => {
+            if (route.name === "AddExpense") {
               toggleModal();
-            }
-            const event = navigation.emit({
-              type: "tabPress",
-              target: route.key,
-              canPreventDefault: true,
-            });
+            } else {
+              if (isModalVisible) {
+                toggleModal();
+              }
+              const event = navigation.emit({
+                type: "tabPress",
+                target: route.key,
+                canPreventDefault: true,
+              });
 
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name, route.params);
+              }
             }
-          }
-        };
+          };
 
-        return (
-          <Pressable
-            key={route.name}
-            href={buildHref(route.name, route.params)}
-            onPress={onPress}
-            style={[
-              styles.tabItem,
-              isFocused ? styles.activeTab : styles.inactiveTab,
-            ]}
-          >
-            <View
+          return (
+            <Pressable
+              key={route.name}
+              href={buildHref(route.name, route.params)}
+              onPress={onPress}
               style={[
-                styles.iconContainer,
-                isModalVisible && route.name === "AddExpense"
-                  ? styles.addExpenseIconContainerActive
-                  : {},
+                styles.tabItem,
+                isFocused ? styles.activeTab : styles.inactiveTab,
               ]}
             >
-              <Ionicons
-                name={isFocused ? icons[route.name][0] : icons[route.name][1]}
-                size={24}
-                color={isFocused ? "#fff" : "#ccc"}
-              />
-            </View>
-          </Pressable>
-        );
-      })}
+              <View
+                style={[
+                  styles.iconContainer,
+                  isModalVisible && route.name === "AddExpense"
+                    ? styles.addExpenseIconContainerActive
+                    : {},
+                ]}
+              >
+                <Ionicons
+                  name={isFocused ? icons[route.name][0] : icons[route.name][1]}
+                  size={24}
+                  color={isFocused ? "#fff" : "#ccc"}
+                />
+              </View>
+            </Pressable>
+          );
+        })}
 
       {isModalVisible && (
         <View style={styles.modalOverlay}>
@@ -204,10 +207,7 @@ const styles = StyleSheet.create({
   },
   addExpenseIconContainerActive: {
     backgroundColor: "#3f3f3f",
-    transform: [
-      { translateY: -20 },
-      { scale: 1.2 },
-    ],
+    transform: [{ translateY: -20 }, { scale: 1.2 }],
   },
   modalOverlay: {
     position: "absolute",

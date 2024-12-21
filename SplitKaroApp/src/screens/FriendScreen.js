@@ -49,7 +49,7 @@ const FriendScreen = ({ navigation }) => {
 
   const addFriend = () => {
     console.log("Add Friend");
-    // navigation.navigate('AddFriend')
+    navigation.navigate('AddFriend')
   };
 
   return (

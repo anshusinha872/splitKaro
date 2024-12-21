@@ -12,7 +12,9 @@ export default function HomeScreen({ navigation }) {
       </View>
       <View>
         <Charts />
-        <RecentTransactions />
+        <View style={{ backgroundColor: "rgba(0, 122, 255,0.1)", }}> 
+          <RecentTransactions />
+        </View>
       </View>
     </View>
   );

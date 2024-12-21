@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     width: "100%",
-    backgroundColor: "rgba(0, 122, 255,0.1)",
+    // backgroundColor: "rgba(0, 122, 255,0.1)",
     height: 400,
   },
   recentTabContainer: {

@@ -7,7 +7,7 @@ import SettingScreen from "../screens/SettingScreen";
 import ActivityScreen from "../screens/ActivityScreen";
 import { TabBar } from "../components/TabBar";
 import Header from "../components/Header";
-
+import AddFriendScreen from "../screens/AddFriendScreen";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -48,13 +48,13 @@ const TabNavigator = () => {
           header: () => <Header />,
         }}
       />
-      {/* <Tab.Screen
-        name="Setting"
-        component={SettingScreen}
+      <Tab.Screen
+        name="AddFriend"
+        component={AddFriendScreen}
         options={{
           header: () => <Header />,
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
