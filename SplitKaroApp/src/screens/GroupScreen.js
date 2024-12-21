@@ -54,62 +54,72 @@ const GroupScreen = ({ navigation }) => {
       icon: require("../../assets/icons/shopping-bag.png"),
     },
   ];
-
+  const navigateToGroup = (item) => {
+    console.log("Navigating to ViewGroup");
+    navigation.navigate("ViewGroup", { group: item });
+  }
   const renderItem = ({ item }) => (
-    <View style={styles.group}>
-      <View style={{ width: "100%", flexDirection: "row" }}>
-        <View style={styles.groupIconContainer}>
-          <Image style={styles.groupIcon} source={item.icon} />
-        </View>
-        <View style={styles.groupDetails}>
-          <View style={styles.groupCategoryDetails}>
-            <Text style={styles.groupCategory}>{item.category}</Text>
+    <TouchableOpacity onPress={
+      () => navigateToGroup(item)
+    }>
+      <View style={styles.group}>
+        <View style={{ width: "100%", flexDirection: "row" }}>
+          <View style={styles.groupIconContainer}>
+            <Image style={styles.groupIcon} source={item.icon} />
           </View>
-          <View style={styles.groupDateContainer}>
-            <Text style={styles.groupDate}>{item.date}</Text>
-            <Text style={styles.groupAmount}>{item.amount}</Text>
+          <View style={styles.groupDetails}>
+            <View style={styles.groupCategoryDetails}>
+              <Text style={styles.groupCategory}>{item.category}</Text>
+            </View>
+            <View style={styles.groupDateContainer}>
+              <Text style={styles.groupDate}>{item.date}</Text>
+              <Text style={styles.groupAmount}>{item.amount}</Text>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View style={styles.groupDescriptionContainer}>
+            <View style={styles.groupDescription}>
+              <Ionicons
+                name="return-down-forward-outline"
+                size={24}
+                color="#6C63FF"
+                style={{ marginRight: 6 }} // Add space between icon and text
+              />
+              <Text>{item.description}</Text>
+            </View>
+            <View style={styles.groupDescription}>
+              <Ionicons
+                name="return-down-forward-outline"
+                size={24}
+                color="#6C63FF"
+                style={{ marginRight: 6 }} // Add space between icon and text
+              />
+              <Text>{item.description}</Text>
+            </View>
+            <View style={styles.groupDescription}>
+              <Ionicons
+                name="return-down-forward-outline"
+                size={24}
+                color="#6C63FF"
+                style={{ marginRight: 6 }} // Add space between icon and text
+              />
+              <Text>{item.description}</Text>
+            </View>
           </View>
         </View>
       </View>
-      <View>
-        <View style={styles.groupDescriptionContainer}>
-          <View style={styles.groupDescription}>
-            <Ionicons
-              name="return-down-forward-outline"
-              size={24}
-              color="#6C63FF"
-              style={{ marginRight: 6 }} // Add space between icon and text
-            />
-            <Text>{item.description}</Text>
-          </View>
-          <View style={styles.groupDescription}>
-            <Ionicons
-              name="return-down-forward-outline"
-              size={24}
-              color="#6C63FF"
-              style={{ marginRight: 6 }} // Add space between icon and text
-            />
-            <Text>{item.description}</Text>
-          </View>
-          <View style={styles.groupDescription}>
-            <Ionicons
-              name="return-down-forward-outline"
-              size={24}
-              color="#6C63FF"
-              style={{ marginRight: 6 }} // Add space between icon and text
-            />
-            <Text>{item.description}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Groups</Text>
-        <TouchableOpacity style={styles.createGroupBtn} onPress={() => setModalVisible(true)}>
+        <TouchableOpacity
+          style={styles.createGroupBtn}
+          onPress={() => setModalVisible(true)}
+        >
           <Text style={styles.createGroupText}>Create a Group</Text>
         </TouchableOpacity>
       </View>

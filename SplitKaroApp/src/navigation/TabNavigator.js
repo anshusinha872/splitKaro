@@ -8,6 +8,8 @@ import ActivityScreen from "../screens/ActivityScreen";
 import { TabBar } from "../components/TabBar";
 import Header from "../components/Header";
 import AddFriendScreen from "../screens/AddFriendScreen";
+import ViewGroup from "../screens/ViewGroup";
+import GroupSettingScreen from "../screens/GroupSettingScreen";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -51,6 +53,20 @@ const TabNavigator = () => {
       <Tab.Screen
         name="AddFriend"
         component={AddFriendScreen}
+        options={{
+          header: () => <Header />,
+        }}
+      />
+      <Tab.Screen
+        name="ViewGroup"
+        component={ViewGroup}
+        options={{
+          header: () => <Header />,
+        }}
+      />
+      <Tab.Screen
+        name="GroupSetting"
+        component={GroupSettingScreen}
         options={{
           header: () => <Header />,
         }}

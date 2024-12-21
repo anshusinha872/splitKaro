@@ -60,7 +60,7 @@ export function TabBar({ state, descriptors, navigation }) {
   return (
     <View style={styles.tabbar}>
       {state.routes
-        .filter((route) => route.name !== "AddFriend")
+        .filter((route) => route.name !== "AddFriend" && route.name !== "ViewGroup" && route.name !== "GroupSetting")
         .map((route, index) => {
           const { options } = descriptors[route.key];
           const isFocused = state.index === index;
