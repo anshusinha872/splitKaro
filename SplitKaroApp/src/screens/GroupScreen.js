@@ -8,8 +8,10 @@ import {
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import AddGroupModal from "../components/AddGroupModal";
 
-const GroupScreen = () => {
+const GroupScreen = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
   const groups = [
     {
       id: "1",
@@ -107,7 +109,7 @@ const GroupScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Groups</Text>
-        <TouchableOpacity style={styles.createGroupBtn}>
+        <TouchableOpacity style={styles.createGroupBtn} onPress={() => setModalVisible(true)}>
           <Text style={styles.createGroupText}>Create a Group</Text>
         </TouchableOpacity>
       </View>
@@ -140,6 +142,11 @@ const GroupScreen = () => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.groupListContainer}
         showsVerticalScrollIndicator={false}
+      />
+      <AddGroupModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        navigation={navigation}
       />
     </View>
   );
