@@ -85,17 +85,24 @@ const ViewGroup = React.memo(
               {groupedTransactions[year][month].map((transaction) => (
                 <View style={styles.transaction} key={transaction.id}>
                   <View style={styles.transactionIconContainer}>
-                    <Image style={styles.transactionIcon} source={transaction.icon} />
+                    <Image
+                      style={styles.transactionIcon}
+                      source={transaction.icon}
+                    />
                   </View>
                   <View style={styles.transactionDetails}>
                     <View style={styles.transactionCategoryDetails}>
-                      <Text style={styles.transactionCategory}>{transaction.category}</Text>
+                      <Text style={styles.transactionCategory}>
+                        {transaction.category}
+                      </Text>
                       <Text style={styles.transactionDescription}>
                         {transaction.description}
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.transactionAmount}>{transaction.amount}</Text>
+                      <Text style={styles.transactionAmount}>
+                        {transaction.amount}
+                      </Text>
                       <Text style={styles.transactionDate}>
                         {moment(transaction.date).format("Do MMM")}
                       </Text>
@@ -115,7 +122,12 @@ const ViewGroup = React.memo(
           <Text
             style={[
               styles.memberOwedAmount,
-              { color: parseFloat(member.owedAmount.replace("₹", "")) < 0 ? "red" : "green" },
+              {
+                color:
+                  parseFloat(member.owedAmount.replace("₹", "")) < 0
+                    ? "red"
+                    : "green",
+              },
             ]}
           >
             {member.owedAmount}
@@ -153,6 +165,31 @@ const ViewGroup = React.memo(
             <Text style={{ fontWeight: "bold" }}>{group.amount}</Text> overall
           </Text>
         </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            backgroundColor: "#fff",
+            borderBottomWidth: 1,
+            borderBottomColor: "#ddd",
+            height: 60,
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center",justifyContent: "center" }}>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Settle up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Charts</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Balances</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Totals</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
         <View style={styles.memberListContainer}>
           <Text style={styles.memberListTitle}>Member Balances</Text>
           {renderMemberOwedAmounts()}
@@ -264,11 +301,9 @@ const styles = StyleSheet.create({
   transactionDate: {
     color: "#A1A1A1",
   },
-  // Added styles for member balances section
   memberListContainer: {
     backgroundColor: "#fff",
     padding: 10,
-    marginVertical: 10,
     borderRadius: 8,
   },
   memberListTitle: {
@@ -289,6 +324,20 @@ const styles = StyleSheet.create({
   memberOwedAmount: {
     fontSize: 14,
     fontWeight: "bold",
+  },
+  btn: {
+    borderColor: "#6C63FF",
+    borderWidth: 1,
+    padding: 4,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 100,
+  },
+  btnText: {
+    color: "#6C63FF",
   },
 });
 
